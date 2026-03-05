@@ -438,7 +438,7 @@ export interface TextRelationExtractionResponse {
 // 文本内容关系提取
 export function extractTextRelations(request: TextRelationExtractionRequest): Promise<TextRelationExtractionResponse> {
     return new Promise((resolve, reject) => {
-        post('/api/v1/initialization/extract/text-relation', request, { timeout: 60000 })
+        post('/api/v1/initialization/extract/text-relation', request, { timeout: 300000 })
             .then((response: any) => {
                 resolve(response.data || { nodes: [], relations: [] });
             })
