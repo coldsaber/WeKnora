@@ -1,0 +1,31 @@
+services:
+  mineru-api:
+    image: mineru:latest
+    container_name: mineru-api
+    restart: always
+    ports:
+      - 8001:8000
+    environment:
+      MINERU_MODEL_SOURCE: local
+    entrypoint: mineru-api
+    command:
+      --host 0.0.0.0
+      --port 8000
+    ulimits:
+      memlock: -1
+      stack: 67108864
+    ipc: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    networks:
+      - default
+
+networks:
+  default:
+    external:
+      name: 1panel-network
